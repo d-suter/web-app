@@ -9,7 +9,7 @@ module.exports = {
   entry: "./src/app.ts",
   devtool: isDev && "inline-source-map",
   output: {
-    path: path.join(__dirname, "build"),
+    path: path.join(__dirname, "public"),
     filename: "app.js",
   },
   module: {
