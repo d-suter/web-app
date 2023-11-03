@@ -2,7 +2,7 @@ import urlcat from "urlcat";
 
 export const REDIRECT_URI = urlcat("https://accounts.spotify.com/authorize", {
   client_id: process.env.CLIENT_ID,
-  redirect_uri: "https://p1wwt4wm-3000.euw.devtunnels.ms/",
+  redirect_uri: "https://spoti-guess.vercel.app",
   response_type: "token",
   scope: [
     "user-read-private",
