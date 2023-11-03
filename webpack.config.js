@@ -1,55 +1,53 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const Dotenv = require("dotenv-webpack");
-const path = require("path");
-
-const isDev = process.env.NODE_ENV !== "production";
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  mode: isDev ? "development" : "production",
-  entry: "./src/app.ts",
-  devtool: isDev && "inline-source-map",
+  entry: './src/index.ts',  // Assuming your main entry point is index.ts in the src directory
+
   output: {
-    path: path.join(__dirname, "build"),
-    filename: "app.js",
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
   },
+
+  // Add a resolve section if you are using TypeScript
+  resolve: {
+    extensions: ['.ts', '.js']
+  },
+
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: [
-          {
-            loader: "ts-loader",
-            options: {
-              transpileOnly: true,
-              experimentalWatchApi: true,
-            },
-          },
-        ],
-        exclude: /node_modules/,
+        use: 'ts-loader',
+        exclude: /node_modules/
       },
       {
-        test: /\.s[ac]ss$/i,
-        use: ["style-loader", "css-loader", "sass-loader"],
-      },
-    ],
+        test: /\.scss$/,  // If you use SCSS, otherwise change to /\.css$/ for CSS
+        use: [
+          'style-loader',  // Injects styles into DOM
+          'css-loader',    // Translates CSS into CommonJS
+          'sass-loader'    // Compiles Sass to CSS, using Node Sass by default
+        ]
+      }
+      // Add other loaders/rules if needed (e.g., for images, fonts, etc.)
+    ]
   },
-  resolve: {
-    extensions: [".tsx", ".ts", ".js"],
-  },
+
   plugins: [
-    new HtmlWebpackPlugin({ template: "./src/index.html" }),
-    new Dotenv(),
+    new HtmlWebpackPlugin({
+      template: './src/index.html'  // Assuming you have an index.html in your src folder
+    }),
+    new Dotenv() // This ensures environment variables from .env are available in your code
   ],
+
+  // Configuration for webpack-dev-server
   devServer: {
-    hot: true,
-    port: 3000,
-    inline: true,
-    contentBase: "./src",
-    watchContentBase: true,
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 9000  // You can specify another port if you want
   },
-  optimization: {
-    removeAvailableModules: false,
-    removeEmptyChunks: false,
-    splitChunks: false,
-  },
+
+  // If you want sourcemaps, you can include this option
+  devtool: 'inline-source-map'
 };
