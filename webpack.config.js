@@ -48,6 +48,7 @@ module.exports = {
     watchContentBase: true,
   },
   optimization: {
+    minimize: false,
     removeAvailableModules: false,
     removeEmptyChunks: false,
     splitChunks: false,
