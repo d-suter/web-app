@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  entry: './src/index.ts',  // Assuming your main entry point is index.ts in the src directory
+  entry: './src/app.ts',  // Assuming your main entry point is index.ts in the src directory
 
   output: {
     filename: 'bundle.js',
