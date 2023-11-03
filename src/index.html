@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+        name="viewport"
+    />
+    <meta content="#1db954" name="theme-color"/>
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+    <title>Spotiguess</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+<body>
+<h1>Spotiguess</h1>
+<h4>The Spotify guessing game</h4>
+<p id="artist">You are not listening to a song</p>
+<p id="special"></p><br>
+<p id="points"></p>
+<label for="guess">Enter Guess:</label>
+<input id="guess" placeholder="Guess" type="text"/>
+<button id="skip-button">Skip Song</button>
+<p class="game-rules">You only have to enter 80% of the song title.</p>
+<div id="correct-container">
+    <svg
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <path
+            d="M5 13l4 4L19 7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+        />
+    </svg>
+</div>
+<a href="https://github.com/spotiguess" id="github-link">GitHub</a>
+<script src="https://sdk.scdn.co/spotify-player.js"></script>
+</body>
+</html>
