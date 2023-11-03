@@ -1,13 +1,7 @@
 {
   "name": "Spotiguess",
-  "version": "1.0.0",
   "description": "Spotify guessing game",
   "license": "MIT",
-  "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack serve",
-    "build": "cross-env NODE_ENV=production webpack",
-    "vercel-build": "node vercel.js && yarn build"
-  },
   "devDependencies": {
     "@types/dotenv-webpack": "^3.0.0",
     "@types/spotify-web-playback-sdk": "^0.1.7",
@@ -29,12 +23,16 @@
     "webpack-cli": "^4.1.0",
     "webpack-dev-server": "^3.11.0"
   },
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack serve",
+    "build": "cross-env NODE_ENV=production webpack",
+    "vercel-build": "node vercel.js&&yarn build"
+  },
   "dependencies": {
     "animate.css": "^4.1.1",
     "key": "^0.1.11",
     "spotify-web-api-js": "^1.5.0",
     "string-similarity": "^4.0.2",
-    "terser-webpack-plugin": "^5.3.9",
     "urlcat": "^2.0.4"
   }
 }

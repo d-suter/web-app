@@ -1,53 +1,55 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
+const path = require("path");
+
+const isDev = process.env.NODE_ENV !== "production";
 
 module.exports = {
-  entry: './src/app.ts',  // Assuming your main entry point is index.ts in the src directory
-
+  mode: isDev ? "development" : "production",
+  entry: "./src/app.ts",
+  devtool: isDev && "inline-source-map",
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.join(__dirname, "build"),
+    filename: "app.js",
   },
-
-  // Add a resolve section if you are using TypeScript
-  resolve: {
-    extensions: ['.ts', '.js']
-  },
-
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/
+        use: [
+          {
+            loader: "ts-loader",
+            options: {
+              transpileOnly: true,
+              experimentalWatchApi: true,
+            },
+          },
+        ],
+        exclude: /node_modules/,
       },
       {
-        test: /\.scss$/,  // If you use SCSS, otherwise change to /\.css$/ for CSS
-        use: [
-          'style-loader',  // Injects styles into DOM
-          'css-loader',    // Translates CSS into CommonJS
-          'sass-loader'    // Compiles Sass to CSS, using Node Sass by default
-        ]
-      }
-      // Add other loaders/rules if needed (e.g., for images, fonts, etc.)
-    ]
+        test: /\.s[ac]ss$/i,
+        use: ["style-loader", "css-loader", "sass-loader"],
+      },
+    ],
   },
-
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
+  },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/index.html'  // Assuming you have an index.html in your src folder
-    }),
-    new Dotenv() // This ensures environment variables from .env are available in your code
+    new HtmlWebpackPlugin({ template: "./src/index.html" }),
+    new Dotenv(),
   ],
-
-  // Configuration for webpack-dev-server
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    port: 9000  // You can specify another port if you want
+    hot: true,
+    port: 3000,
+    inline: true,
+    contentBase: "./src",
+    watchContentBase: true,
   },
-
-  // If you want sourcemaps, you can include this option
-  devtool: 'inline-source-map'
+  optimization: {
+    removeAvailableModules: false,
+    removeEmptyChunks: false,
+    splitChunks: false,
+  },
 };
