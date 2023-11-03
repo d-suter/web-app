@@ -34,6 +34,7 @@
     "key": "^0.1.11",
     "spotify-web-api-js": "^1.5.0",
     "string-similarity": "^4.0.2",
+    "terser-webpack-plugin": "^5.3.9",
     "urlcat": "^2.0.4"
   }
 }
